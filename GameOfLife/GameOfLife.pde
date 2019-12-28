@@ -1,56 +1,40 @@
-int cellSize = 5;
+int gSize = 2;
+float gAliveTreshold = 0.5;
 
-int rows;
-int cols;
 
-Cell[][] grid;
+Grid gGrid;
+View gView;
+int gRows;
+int gCols;
 
 void setup()
 {
-  //fullScreen();
-  size(700,700);
-  
-  background(210);
-  frameRate(60);
-  
-   rows = floor(height/cellSize);
-   cols = floor(width/cellSize);
-   grid = new Cell[rows][cols];
+  fullScreen();
+  //size(695, 704);
 
-  for (int i = 0; i < rows; i++)
-  { 
-   for (int j = 0; j < cols; j++)
-    {
-      boolean startAlive = random(1) > 0.75; 
-      grid[i][j] = new Cell(i ,j, startAlive);
-    }
-  }
-  
+  gRows = height;
+  gCols = width;
+  println(gRows, gCols);
+
+  background(0);
+  frameRate(20);
+
+  gGrid = new Grid();
+  gView = new View();
 }
 
 void draw()
 {
-  background(210);
-  for (Cell[] row : grid)
-  {
-    for (Cell cell : row)
-    {
-      cell.update();
-    }
-  }
-  for (Cell[] row : grid)
-  {
-    for (Cell cell : row)
-    {
-        cell.show();
-    }
-  }
+  gGrid.update();
+
+  background(0, 0, 10);
+  gView.show();
 }
 
-void mouseDragged()
-{
-  int clickX = int(map(mouseX, 0, width, 0, cols));
-  int clickY = int(map(mouseY, 0, height, 0, rows));
-  
-  grid[clickX][clickY].alivePrev = true;
-}
+//void mouseDragged()
+//{
+//  int clickX = int(map(mouseX, 0, width, 0, gCols));
+//  int clickY = int(map(mouseY, 0, height, 0, gRows));
+
+//  gGrid.setElement (clickY,clickX, true);
+//}
