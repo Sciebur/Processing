@@ -1,5 +1,5 @@
-int gSize = 2;
-float gAliveTreshold = 0.5;
+int gSize = 1;
+float gAliveTreshold = 0.8;
 
 
 Grid gGrid;
@@ -9,12 +9,11 @@ int gCols;
 
 void setup()
 {
-  fullScreen();
+  fullScreen(); //<>//
   //size(695, 704);
 
-  gRows = height;
-  gCols = width;
-  println(gRows, gCols);
+  gRows = height/gSize;
+  gCols = width/gSize;
 
   background(0);
   frameRate(20);
