@@ -1,10 +1,11 @@
 int lineWidth = 14;
 int lineSpacing = 40;
-float animationTime = 5;
+float animationFrames = 300;
 
-
-float animationFrames;
 int count;
+
+import gifAnimation.*;
+GifMaker gifExport;
 
 void setup()
 {
@@ -14,8 +15,10 @@ void setup()
   background(0);
   colorMode(RGB);
 
-  animationFrames = frameRate * animationTime;
   count = floor(height / lineSpacing);
+  
+  gifExport = new GifMaker(this, "animation.gif");
+  gifExport.setRepeat(0);
 }
 
 void draw()
@@ -34,5 +37,18 @@ void draw()
   {
     rotate(rotation);
     arc(0, 0, i * lineSpacing, i * lineSpacing, 0, TAU/2);
+  }
+  
+  if (frameCount <= animationFrames)
+  {
+  gifExport.setDelay(16);
+  gifExport.addFrame();
+  println(frameCount);
+  }
+
+  if (frameCount == animationFrames)
+  {
+    boolean ret = gifExport.finish();
+    println("Recording done! result: " + ret);
   }
 }
