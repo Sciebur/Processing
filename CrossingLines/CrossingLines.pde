@@ -21,7 +21,7 @@ void setup()
   count = floor(height/lineWidth);
   lineLength = height/3;
   
-  gifExport = new GifMaker(this, "crossingLines.gif");
+  gifExport = new GifMaker(this, "animation.gif");
   gifExport.setRepeat(0);
   //gifExport.setTransparent(0,0,0);
 }
