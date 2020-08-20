@@ -12,7 +12,7 @@ def setup():
     frameRate(60)
     colorMode(HSB,MAX_COLOR)
 
-    nodes.append(Node(PVector(width*1/2, height*1/2), PVector.fromAngle(-TAU/4)))
+    makeFirstNode()
 
 def draw():  
     background(0,0,0)
@@ -29,6 +29,10 @@ def keyPressed():
     global newNodes
     global step
     
+    if key == 'r':
+        reset()
+        return
+    
     step += 1
     for n in nodes:
         for child in n.spawnChilds(step):
@@ -37,7 +41,7 @@ def keyPressed():
     nodes = list(newNodes)
     newNodes = []
     
-    print("Step done:" ,step)
+    print("Step" , step)
     
 def drawGrid(iter):
     stroke(MAX_COLOR/2,MAX_COLOR/2,MAX_COLOR/2,MAX_COLOR/2)
@@ -54,3 +58,14 @@ def drawLine(one,two,col):
     strokeWeight(1)
     
     line (one.pos.x, one.pos.y, two.pos.x, two.pos.y)
+    
+def makeFirstNode():
+    global nodes
+    nodes = []
+    nodes.append(Node(PVector(width*1/2, height*1/2), PVector.fromAngle(-TAU/4)))
+    
+def reset():
+    global step
+    makeFirstNode()
+    step = 1
+    print("reset") 
