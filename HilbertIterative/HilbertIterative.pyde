@@ -4,7 +4,6 @@ MAX_COLOR = 10000000
 from Node import Node
 
 nodes = []
-newNodes = []
 step = 1
 
 def setup():
@@ -26,7 +25,6 @@ def draw():
     
 def keyPressed():
     global nodes
-    global newNodes
     global step
     
     if key == 'r':
@@ -34,13 +32,12 @@ def keyPressed():
         return
     
     step += 1
+    newNodes = []
     for n in nodes:
         for child in n.spawnChilds(step):
             newNodes.append(child)
 
-    nodes = list(newNodes)
-    newNodes = []
-    
+    nodes = newNodes    
     print("Step" , step)
     
 def drawGrid(iter):
