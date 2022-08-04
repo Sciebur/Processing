@@ -1,11 +1,7 @@
 int lineWidth = 14;
 int lineSpacing = 25;
-float slidingFrames = 50;
-float rotationFrames = 500000;
-boolean recording = true; 
-
-import gifAnimation.*;
-GifMaker gifExport;
+float slidingFrames = 100;
+float rotationFrames = 50000000;
 
 float lineLength;
 int count;
@@ -20,10 +16,6 @@ void setup()
   
   count = floor(height/lineWidth);
   lineLength = height/3;
-  
-  gifExport = new GifMaker(this, "animation.gif");
-  gifExport.setRepeat(0);
-  //gifExport.setTransparent(0,0,0);
 }
 
 void draw()
@@ -45,17 +37,5 @@ void draw()
     line (rotation, i*lineSpacing, rotation + lineLength, i*lineSpacing);
     line (i*lineSpacing, rotation, i*lineSpacing, rotation + lineLength);
   }
-  
-  if (frameCount <= slidingFrames)
-  {
-  gifExport.setDelay(16);
-  gifExport.addFrame();
-  println(frameCount);
-  }
 
-  if (frameCount == slidingFrames)
-  {
-    boolean ret = gifExport.finish();
-    println("Recording done! result: " + ret);
-  }
 }
